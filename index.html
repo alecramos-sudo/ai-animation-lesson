@@ -335,13 +335,16 @@
     <h2 class="section-title">What AI Can Do Today</h2>
     <div id="what-ai-content">
       <div class="card" style="margin-bottom:16px;">
-        <strong>Text &amp; Code</strong> — ChatGPT, Claude, Gemini. Conversational AI that writes, edits, summarizes, and codes. Free tiers available — paid unlocks longer context and better models.
+        <strong>Text &amp; Code</strong> — ChatGPT, Claude, Gemini, Codex. Conversational AI that writes, edits, summarizes, and codes. Free tiers available — paid unlocks longer context and better models. Some run in the terminal (Claude Code, Codex CLI) and can read/write files directly.
       </div>
       <div class="card" style="margin-bottom:16px;">
         <strong>Images &amp; Video</strong> — Midjourney, DALL-E, Runway, Firefly. Generate and edit visuals from text prompts. Quality is production-ready for many use cases.
       </div>
       <div class="card" style="margin-bottom:16px;">
         <strong>Design &amp; Prototyping</strong> — Figma AI, Galileo, v0. AI is entering the design tool workflow directly — generating layouts, components, and prototypes.
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <strong>Code &amp; Animation</strong> — AI-powered code editors (Cursor, Windsurf) and frameworks like Remotion let you generate programmatic animations and even render to video — all driven by code AI can write for you.
       </div>
       <div class="card" style="margin-bottom:16px;">
         <strong>What they all share</strong> — They work best when you're specific. Vague input = generic output. The skill is learning to direct them.
@@ -558,16 +561,53 @@
   <section class="section" id="ai-workflow">
     <h2 class="section-title">The AI Workflow</h2>
     <div id="ai-workflow-content">
+      <h3 style="margin-bottom:20px;font-size:1.25rem;font-weight:600;">The Basic Pipeline</h3>
       <div class="pipeline">
         <div class="step">Figma</div>
         <span class="arrow">→</span>
         <div class="step">Export SVG</div>
         <span class="arrow">→</span>
-        <div class="step">Claude</div>
+        <div class="step">Claude / Codex</div>
         <span class="arrow">→</span>
         <div class="step">Animated SVG</div>
         <span class="arrow">→</span>
         <div class="step">Preview</div>
+      </div>
+
+      <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Figma MCP — Skip the Export</h3>
+      <p style="color:var(--text-muted);margin-bottom:16px;">With the Figma MCP server connected, Claude can pull designs directly from your Figma file — no manual copy/paste needed.</p>
+      <div class="pipeline" style="margin-bottom:16px;">
+        <div class="step" style="background:var(--accent);color:white;border-color:var(--accent);">Figma URL</div>
+        <span class="arrow">→</span>
+        <div class="step">Claude reads via MCP</div>
+        <span class="arrow">→</span>
+        <div class="step">SVG extracted</div>
+        <span class="arrow">→</span>
+        <div class="step">Animated</div>
+      </div>
+      <div class="prompt-card good" style="margin-bottom:8px;">
+        "Using Figma MCP, get the icon at figma.com/design/abc123. Export it as SVG. Animate with a draw-on effect — 3s duration, loop. Save as icon-animated.svg and create an HTML preview."
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:32px;">One prompt: design to animated preview. No tabs, no exports, no file management.</p>
+
+      <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Pick Your Tool</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;">
+        <div class="card" style="padding:16px 20px;">
+          <strong style="display:block;margin-bottom:4px;">Claude Code / Codex CLI</strong>
+          <span style="font-size:14px;color:var(--text-muted);">Terminal-based. Reads files, writes SVGs, creates previews. Best for batch work and Figma MCP integration.</span>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong style="display:block;margin-bottom:4px;">Claude.ai / ChatGPT</strong>
+          <span style="font-size:14px;color:var(--text-muted);">Upload SVG in chat, describe what you want. Simpler, no setup — but no file system access.</span>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong style="display:block;margin-bottom:4px;">Gemini / Google AI Studio</strong>
+          <span style="font-size:14px;color:var(--text-muted);">Google's model. Strong at code generation, generous free tier. Can work with SVG markup directly in chat.</span>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong style="display:block;margin-bottom:4px;">Remotion</strong>
+          <span style="font-size:14px;color:var(--text-muted);">React-based programmatic video/animation. AI writes the code, Remotion renders to MP4. For when SVG/SMIL isn't enough.</span>
+        </div>
       </div>
 
       <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Good Prompt vs Bad Prompt</h3>
@@ -636,10 +676,16 @@
           <strong>Claude Code</strong> — <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:14px;">npm install -g @anthropic-ai/claude-code</code>
         </div>
         <div class="card" style="padding:16px 20px;">
+          <strong>Codex CLI</strong> — <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:14px;">npm install -g @openai/codex</code> — OpenAI's terminal agent, similar workflow
+        </div>
+        <div class="card" style="padding:16px 20px;">
           <strong>Figma MCP</strong> — <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:14px;">claude mcp add figma https://mcp.figma.com/mcp</code>
         </div>
         <div class="card" style="padding:16px 20px;">
-          <strong>Claude.ai</strong> — Upload .svg files directly in chat for quick animation
+          <strong>Claude.ai / ChatGPT / Gemini</strong> — Upload .svg files directly in chat for quick animation. All have free tiers.
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong>Remotion</strong> — React-based animation framework. AI writes the code, Remotion renders to MP4. Great for complex sequences.
         </div>
         <div class="card" style="padding:16px 20px;">
           <strong>LottieFiles</strong> — Upload .json for cross-platform animation testing
