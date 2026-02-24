@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered SVG Animation Workshop</title>
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #2563eb;
+      --card-bg: #ffffff;
+      --card-border: #e5e7eb;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* --- Layout --- */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      line-height: 1.5;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero .hero-subtitle {
+      font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .hero .hero-audience {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* --- Cards --- */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* --- Playground --- */
+    .playground {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .playground .svg-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      background: #f5f5f3;
+      border-radius: 8px;
+    }
+
+    .playground .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .playground {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- Sliders --- */
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slider-group label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .slider-group label span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #e5e7eb;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: none;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* --- Toggle Button --- */
+    .toggle-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .toggle-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* --- Transition Block --- */
+    .transition-block {
+      text-align: center;
+      padding: 60px 24px;
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+      color: var(--text);
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* --- Quote Block --- */
+    .quote-block {
+      padding: 24px 0 24px 24px;
+      border-left: 3px solid var(--accent);
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    /* --- Pipeline --- */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 24px 0;
+    }
+
+    .pipeline .step {
+      padding: 10px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .pipeline .arrow {
+      color: var(--text-muted);
+      font-size: 20px;
+    }
+
+    /* --- Prompt Cards --- */
+    .prompt-card {
+      padding: 20px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .prompt-card.bad {
+      background: #fef2f2;
+      border-left: 3px solid #ef4444;
+    }
+
+    .prompt-card.good {
+      background: #f0fdf4;
+      border-left: 3px solid #22c55e;
+    }
+
+    /* --- Reference Grid --- */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .ref-card {
+      text-align: center;
+      padding: 20px 12px;
+    }
+
+    /* --- Before / After --- */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .before-after {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- Step List --- */
+    .step-list {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .step-list li {
+      counter-increment: steps;
+      padding-left: 36px;
+      position: relative;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+
+    .step-list li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* --- Playground card titles --- */
+    .playground-card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .playground-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================
+       HERO
+       ========================================= -->
+  <header class="hero">
+    <h1>AI-Powered SVG Animation</h1>
+    <p class="hero-subtitle">From Static Icons to Production Motion</p>
+    <p class="hero-audience">A workshop for designers</p>
+  </header>
+
+  <!-- =========================================
+       SECTION 1 — What AI Can Do Today
+       ========================================= -->
+  <section class="section" id="what-ai-can-do">
+    <h2 class="section-title">What AI Can Do Today</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+    <div id="what-ai-content">
+      <!-- Placeholder for section content -->
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 2 — How It's Changing Design Work
+       ========================================= -->
+  <section class="section" id="changing-design">
+    <h2 class="section-title">How It's Changing Design Work</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+    <div id="changing-design-content">
+      <!-- Placeholder for section content -->
+    </div>
+  </section>
+
+  <!-- =========================================
+       TRANSITION MOMENT
+       ========================================= -->
+  <div class="transition-block" id="transition-moment">
+    <p>Content coming soon...</p>
+  </div>
+
+  <!-- =========================================
+       SECTION 3 — Meet the SVG
+       ========================================= -->
+  <section class="section" id="meet-the-svg">
+    <h2 class="section-title">Meet the SVG</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+    <div id="meet-svg-content">
+      <!-- Placeholder for section content -->
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 4 — One Icon, Many Motions
+       ========================================= -->
+  <section class="section" id="one-icon-many-motions">
+    <h2 class="section-title">One Icon, Many Motions</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+
+    <div class="playground-cards">
+
+      <!-- Pulse Playground -->
+      <div class="card" id="pulse-playground">
+        <h3 class="playground-card-title">Pulse</h3>
+        <div class="playground">
+          <div class="svg-preview">
+            <div id="pulse-svg-container">
+              <!-- SVG will be injected here -->
+            </div>
+          </div>
+          <div class="controls">
+            <div class="slider-group">
+              <label>Speed <span id="pulse-speed-value">1.0s</span></label>
+              <input type="range" id="pulse-speed" min="0.2" max="3" step="0.1" value="1.0">
+            </div>
+            <div class="slider-group">
+              <label>Scale <span id="pulse-scale-value">1.2</span></label>
+              <input type="range" id="pulse-scale" min="1.0" max="2.0" step="0.1" value="1.2">
+            </div>
+            <button class="toggle-btn active" id="pulse-toggle">Playing</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expand Playground -->
+      <div class="card" id="expand-playground">
+        <h3 class="playground-card-title">Expand</h3>
+        <div class="playground">
+          <div class="svg-preview">
+            <div id="expand-svg-container">
+              <!-- SVG will be injected here -->
+            </div>
+          </div>
+          <div class="controls">
+            <div class="slider-group">
+              <label>Duration <span id="expand-duration-value">0.6s</span></label>
+              <input type="range" id="expand-duration" min="0.1" max="2" step="0.1" value="0.6">
+            </div>
+            <div class="slider-group">
+              <label>Distance <span id="expand-distance-value">8px</span></label>
+              <input type="range" id="expand-distance" min="2" max="20" step="1" value="8">
+            </div>
+            <button class="toggle-btn active" id="expand-toggle">Playing</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spin Playground -->
+      <div class="card" id="spin-playground">
+        <h3 class="playground-card-title">Spin</h3>
+        <div class="playground">
+          <div class="svg-preview">
+            <div id="spin-svg-container">
+              <!-- SVG will be injected here -->
+            </div>
+          </div>
+          <div class="controls">
+            <div class="slider-group">
+              <label>Speed <span id="spin-speed-value">2.0s</span></label>
+              <input type="range" id="spin-speed" min="0.5" max="5" step="0.1" value="2.0">
+            </div>
+            <div class="slider-group">
+              <label>Easing <span id="spin-easing-value">linear</span></label>
+              <input type="range" id="spin-easing" min="0" max="2" step="1" value="0">
+            </div>
+            <button class="toggle-btn active" id="spin-toggle">Playing</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Draw-On Playground -->
+      <div class="card" id="drawon-playground">
+        <h3 class="playground-card-title">Draw-On</h3>
+        <div class="playground">
+          <div class="svg-preview">
+            <div id="drawon-svg-container">
+              <!-- SVG will be injected here -->
+            </div>
+          </div>
+          <div class="controls">
+            <div class="slider-group">
+              <label>Duration <span id="drawon-duration-value">1.5s</span></label>
+              <input type="range" id="drawon-duration" min="0.5" max="4" step="0.1" value="1.5">
+            </div>
+            <div class="slider-group">
+              <label>Delay <span id="drawon-delay-value">0.0s</span></label>
+              <input type="range" id="drawon-delay" min="0" max="1" step="0.1" value="0">
+            </div>
+            <button class="toggle-btn active" id="drawon-toggle">Playing</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 5 — A Real Example
+       ========================================= -->
+  <section class="section" id="real-example">
+    <h2 class="section-title">A Real Example</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+    <div id="real-example-content">
+      <!-- Placeholder for section content -->
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 6 — The AI Workflow
+       ========================================= -->
+  <section class="section" id="ai-workflow">
+    <h2 class="section-title">The AI Workflow</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+    <div id="ai-workflow-content">
+      <!-- Placeholder for section content -->
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 7 — Take It Home
+       ========================================= -->
+  <section class="section" id="take-it-home">
+    <h2 class="section-title">Take It Home</h2>
+    <p class="section-subtitle">Content coming soon...</p>
+    <div id="take-it-home-content">
+      <!-- Placeholder for section content -->
+    </div>
+  </section>
+
+  <!-- =========================================
+       FOOTER
+       ========================================= -->
+  <footer>
+    <p>AI-Powered SVG Animation Workshop</p>
+  </footer>
+
+</body>
+</html>
