@@ -315,6 +315,28 @@
       flex-direction: column;
       gap: 32px;
     }
+
+    /* --- Two-column grids --- */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- Section divider --- */
+    .act-divider {
+      max-width: 800px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--card-border);
+    }
   </style>
 </head>
 <body>
@@ -367,6 +389,7 @@
   <!-- =========================================
        TRANSITION MOMENT
        ========================================= -->
+  <hr class="act-divider">
   <div class="transition-block" id="transition-moment">
     <p>Let's get hands-on with one specific thing AI is great at — turning static icons into animated ones.</p>
   </div>
@@ -416,7 +439,7 @@
        ========================================= -->
   <section class="section" id="one-icon-many-motions">
     <h2 class="section-title">One Icon, Many Motions</h2>
-    <p class="section-subtitle">Content coming soon...</p>
+    <p class="section-subtitle">Same three circles, four completely different animations. Drag the sliders to see how each parameter changes the effect.</p>
 
     <div class="playground-cards">
 
@@ -591,7 +614,7 @@
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:32px;">One prompt: design to animated preview. No tabs, no exports, no file management.</p>
 
       <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Pick Your Tool</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;">
+      <div class="two-col" style="gap:12px;">
         <div class="card" style="padding:16px 20px;">
           <strong style="display:block;margin-bottom:4px;">Claude Code / Codex CLI</strong>
           <span style="font-size:14px;color:var(--text-muted);">Terminal-based. Reads files, writes SVGs, creates previews. Best for batch work and Figma MCP integration.</span>
@@ -611,7 +634,7 @@
       </div>
 
       <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Good Prompt vs Bad Prompt</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+      <div class="two-col">
         <div>
           <p style="font-size:13px;color:#ef4444;font-weight:600;margin-bottom:8px;">Weak</p>
           <div class="prompt-card bad">"Animate this SVG"<br><br><em style="font-size:13px;color:var(--text-muted);">Claude will guess. You'll iterate 3-4 times.</em></div>

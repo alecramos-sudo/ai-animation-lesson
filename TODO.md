@@ -17,11 +17,11 @@
 - [x] Branding: Willa Creative only
 
 ## Polish / Nice to Have
+- [x] Prompt comparison grid — mobile breakpoint added (two-col class)
+- [x] Tool comparison grid — mobile breakpoint added (two-col class)
+- [x] Section 4 "Content coming soon..." replaced with real subtitle
+- [x] Section divider (hr) between Act 1 and Act 2
 - [ ] Mobile test — verify responsive layout on actual phone
-- [ ] Prompt comparison grid needs mobile breakpoint (currently inline 2-col)
-- [ ] Tool comparison grid needs mobile breakpoint
-- [ ] Section 4 "Content coming soon..." subtitle still showing — remove it
-- [ ] Add subtle section dividers or more spacing between Act 1 and Act 2
 - [ ] Consider adding a table of contents / nav dots for scrolling
 - [ ] Test all playgrounds in Safari and Firefox
 - [ ] Add more complex Figma MCP example or live demo section
