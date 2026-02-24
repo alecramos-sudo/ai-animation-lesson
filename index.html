@@ -545,5 +545,178 @@
     <p>AI-Powered SVG Animation Workshop</p>
   </footer>
 
+
+  <script>
+    /* =========================================
+       Interactive SVG Animation Playgrounds
+       ========================================= */
+
+    let animationsPaused = false;
+    const generators = {};
+
+    function renderPlayground(name) {
+      const container = document.getElementById(name + '-svg-container');
+      const svgMarkup = generators[name]();
+      container.innerHTML = svgMarkup;
+      container.querySelectorAll('animate, animateTransform').forEach(function(el) {
+        try { el.beginElement(); } catch(e) {}
+      });
+      if (animationsPaused) {
+        const svg = container.querySelector('svg');
+        if (svg) svg.pauseAnimations();
+      }
+    }
+
+    const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionQuery.matches) animationsPaused = true;
+    motionQuery.addEventListener('change', function(e) {
+      animationsPaused = e.matches;
+      document.querySelectorAll('svg').forEach(function(s) {
+        try { e.matches ? s.pauseAnimations() : s.unpauseAnimations(); } catch(ex) {}
+      });
+    });
+
+    /* ----- Pulse ----- */
+    generators.pulse = function() {
+      var dur = parseFloat(document.getElementById('pulse-dur').value);
+      var intensity = parseFloat(document.getElementById('pulse-intensity').value);
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 30 30" fill="none">'
+        + '<circle cx="15" cy="15" r="14.5" stroke="#2563eb"/>'
+        + '<circle cx="15" cy="15" r="9.5" stroke="#2563eb">'
+        +   '<animate attributeName="r" values="9.5;' + (9.5 + intensity) + ';9.5" dur="' + dur + 's" repeatCount="indefinite"/>'
+        + '</circle>'
+        + '<circle cx="15" cy="15" r="4.5" stroke="#2563eb">'
+        +   '<animate attributeName="r" values="4.5;' + (4.5 + intensity) + ';4.5" dur="' + dur + 's" begin="0.3s" repeatCount="indefinite"/>'
+        + '</circle>'
+        + '</svg>';
+    };
+
+    /* ----- Expand ----- */
+    generators.expand = function() {
+      var dur = parseFloat(document.getElementById('expand-dur').value);
+      var waveCount = parseInt(document.getElementById('expand-waves').value, 10);
+      var offset = dur / waveCount;
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 30 30" fill="none">'
+        + '<defs><clipPath id="expand-clip"><circle cx="15" cy="15" r="14"/></clipPath></defs>'
+        + '<circle cx="15" cy="15" r="14.5" stroke="#2563eb"/>'
+        + '<g clip-path="url(#expand-clip)">';
+      for (var i = 0; i < waveCount; i++) {
+        var begin = (i * offset).toFixed(2);
+        svg += '<circle cx="15" cy="15" r="0" stroke="#2563eb" fill="none">'
+          + '<animate attributeName="r" values="0;4.5;9.5;14.5" dur="' + dur + 's" begin="' + begin + 's" repeatCount="indefinite"/>'
+          + '</circle>';
+        svg += '<circle cx="15" cy="15" r="4.5" stroke="#2563eb" fill="none">'
+          + '<animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="' + dur + 's" begin="' + begin + 's" repeatCount="indefinite"/>'
+          + '</circle>';
+        svg += '<circle cx="15" cy="15" r="9.5" stroke="#2563eb" fill="none">'
+          + '<animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="' + dur + 's" begin="' + begin + 's" repeatCount="indefinite"/>'
+          + '</circle>';
+      }
+      svg += '</g></svg>';
+      return svg;
+    };
+
+    /* ----- Spin ----- */
+    generators.spin = function() {
+      var dur = parseFloat(document.getElementById('spin-dur').value);
+      var arcPct = parseFloat(document.getElementById('spin-arc').value);
+      var opposite = document.getElementById('spin-dir').classList.contains('active');
+      var midCirc = 2 * Math.PI * 9.5;
+      var innerCirc = 2 * Math.PI * 4.5;
+      var dashMid = midCirc * (arcPct / 100);
+      var gapMid = midCirc - dashMid;
+      var dashInner = innerCirc * (arcPct / 100);
+      var gapInner = innerCirc - dashInner;
+      var innerFrom = opposite ? '360 15 15' : '0 15 15';
+      var innerTo   = opposite ? '0 15 15'   : '360 15 15';
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 30 30" fill="none">'
+        + '<circle cx="15" cy="15" r="14.5" stroke="#2563eb"/>'
+        + '<circle cx="15" cy="15" r="9.5" stroke="#2563eb" fill="none" stroke-dasharray="' + dashMid + ' ' + gapMid + '">'
+        +   '<animateTransform attributeName="transform" type="rotate" from="0 15 15" to="360 15 15" dur="' + dur + 's" repeatCount="indefinite"/>'
+        + '</circle>'
+        + '<circle cx="15" cy="15" r="4.5" stroke="#2563eb" fill="none" stroke-dasharray="' + dashInner + ' ' + gapInner + '">'
+        +   '<animateTransform attributeName="transform" type="rotate" from="' + innerFrom + '" to="' + innerTo + '" dur="' + dur + 's" repeatCount="indefinite"/>'
+        + '</circle>'
+        + '</svg>';
+    };
+
+    /* ----- Draw-On ----- */
+    generators.drawon = function() {
+      var dur = parseFloat(document.getElementById('drawon-dur').value);
+      var stagger = parseFloat(document.getElementById('drawon-stagger').value);
+      var circs = [91.1, 59.7, 28.3];
+      var drawDuration = 0.25;
+      var circles = '';
+
+      for (var i = 0; i < 3; i++) {
+        var circ = circs[i];
+        var r = [14.5, 9.5, 4.5][i];
+        var startDraw = i * stagger;
+        var endDraw = Math.min(startDraw + drawDuration, 0.79);
+        startDraw = Math.min(startDraw, endDraw - 0.01);
+        var keyTimes, values;
+
+        if (i === 0) {
+          keyTimes = [0, endDraw, 0.8, 1];
+          values = [circ, 0, 0, circ];
+        } else if (i === 1) {
+          keyTimes = [0, startDraw, endDraw, 0.8, 1];
+          values = [circ, circ, 0, 0, circ];
+        } else {
+          keyTimes = [0, Math.max(0.01, stagger), startDraw, endDraw, 0.8, 1];
+          values = [circ, circ, circ, 0, 0, circ];
+        }
+
+        // Clamp to [0,1] and ensure strictly monotonic
+        for (var j = 0; j < keyTimes.length; j++) {
+          keyTimes[j] = Math.max(0, Math.min(1, keyTimes[j]));
+          if (j > 0 && keyTimes[j] <= keyTimes[j - 1]) {
+            keyTimes[j] = keyTimes[j - 1] + 0.001;
+          }
+        }
+
+        // Runtime guard
+        if (keyTimes.length !== values.length) {
+          keyTimes = [0, 0.25, 0.8, 1];
+          values = [circ, 0, 0, circ];
+        }
+
+        circles += '<circle cx="15" cy="15" r="' + r + '" stroke="#2563eb" fill="none" stroke-dasharray="' + circ + '" stroke-dashoffset="' + circ + '">'
+          + '<animate attributeName="stroke-dashoffset" values="' + values.join(';') + '" keyTimes="' + keyTimes.map(function(t) { return t.toFixed(3); }).join(';') + '" dur="' + dur + 's" repeatCount="indefinite"/>'
+          + '</circle>';
+      }
+
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 30 30" fill="none">'
+        + circles
+        + '</svg>';
+    };
+
+    /* ----- Event Wiring ----- */
+    ['pulse', 'expand', 'spin', 'drawon'].forEach(function(name) {
+      var playground = document.getElementById(name + '-playground');
+      var inputs = playground.querySelectorAll('input[type="range"]');
+      inputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+          var valueSpan = document.getElementById(input.id + '-value');
+          if (valueSpan) {
+            var suffix = '';
+            if (input.id.indexOf('dur') !== -1) suffix = 's';
+            if (input.id.indexOf('arc') !== -1) suffix = '%';
+            valueSpan.textContent = input.value + suffix;
+          }
+          renderPlayground(name);
+        });
+      });
+      renderPlayground(name);
+    });
+
+    // Spin direction toggle
+    var spinDirBtn = document.getElementById('spin-dir');
+    spinDirBtn.addEventListener('click', function() {
+      spinDirBtn.classList.toggle('active');
+      spinDirBtn.textContent = spinDirBtn.classList.contains('active') ? 'Opposite' : 'Same Direction';
+      renderPlayground('spin');
+    });
+  </script>
 </body>
 </html>
