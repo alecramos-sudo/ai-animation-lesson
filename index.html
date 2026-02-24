@@ -510,9 +510,45 @@
        ========================================= -->
   <section class="section" id="real-example">
     <h2 class="section-title">A Real Example</h2>
-    <p class="section-subtitle">Content coming soon...</p>
     <div id="real-example-content">
-      <!-- Placeholder for section content -->
+      <div class="before-after">
+        <div style="text-align:center">
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Before</p>
+          <svg width="120" height="120" viewBox="0 0 421 422" fill="none"><circle cx="210.5" cy="211" r="210" stroke="#2563eb"/><circle cx="210.501" cy="147.544" r="147.044" stroke="#2563eb"/><circle cx="210.499" cy="338.351" r="82.6497" stroke="#2563eb"/><path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#2563eb"/></svg>
+        </div>
+        <div style="text-align:center">
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">After — animated with AI</p>
+          <svg width="120" height="120" viewBox="0 0 421 422" fill="none">
+            <circle cx="210.5" cy="211" r="210" stroke="#2563eb" stroke-dasharray="1319.5" stroke-dashoffset="1319.5">
+              <animate attributeName="stroke-dashoffset" values="1319.5;0;0;1319.5" keyTimes="0;0.25;0.75;1" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="210.501" cy="147.544" r="147.044" stroke="#2563eb" stroke-dasharray="923.6" stroke-dashoffset="923.6">
+              <animate attributeName="stroke-dashoffset" values="923.6;923.6;0;0;923.6" keyTimes="0;0.15;0.4;0.75;1" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="210.499" cy="338.351" r="82.6497" stroke="#2563eb" stroke-dasharray="519.2" stroke-dashoffset="519.2">
+              <animate attributeName="stroke-dashoffset" values="519.2;519.2;519.2;0;0;519.2" keyTimes="0;0.15;0.3;0.55;0.75;1" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#2563eb" stroke-dasharray="1100" stroke-dashoffset="1100">
+              <animate attributeName="stroke-dashoffset" values="1100;1100;1100;1100;0;0;1100" keyTimes="0;0.15;0.3;0.45;0.7;0.8;1" dur="4s" repeatCount="indefinite"/>
+            </path>
+          </svg>
+        </div>
+      </div>
+
+      <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">How it was built</h3>
+      <ol class="step-list">
+        <li>Exported the icon from Figma as SVG</li>
+        <li>Identified the 4 shapes and their stroke lengths</li>
+        <li>Asked Claude to animate them sequentially with draw-on</li>
+        <li>Iterated: adjusted timing overlaps so shapes cascade smoothly</li>
+      </ol>
+
+      <div style="margin-top:32px;">
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">The prompt that built this:</p>
+        <div class="prompt-card good">
+          "Read caglia.svg. It has an outer circle, top circle, bottom circle, and a horizontal oval. Animate each sequentially with stroke-dashoffset draw-on. Outer draws first (0-25%), top circle next (15-40%), bottom circle (30-55%), oval last (45-70%). Hold all visible 70-80%, then erase. Total cycle 4s, loop."
+        </div>
+      </div>
     </div>
   </section>
 
@@ -521,9 +557,37 @@
        ========================================= -->
   <section class="section" id="ai-workflow">
     <h2 class="section-title">The AI Workflow</h2>
-    <p class="section-subtitle">Content coming soon...</p>
     <div id="ai-workflow-content">
-      <!-- Placeholder for section content -->
+      <div class="pipeline">
+        <div class="step">Figma</div>
+        <span class="arrow">→</span>
+        <div class="step">Export SVG</div>
+        <span class="arrow">→</span>
+        <div class="step">Claude</div>
+        <span class="arrow">→</span>
+        <div class="step">Animated SVG</div>
+        <span class="arrow">→</span>
+        <div class="step">Preview</div>
+      </div>
+
+      <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Good Prompt vs Bad Prompt</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+        <div>
+          <p style="font-size:13px;color:#ef4444;font-weight:600;margin-bottom:8px;">Weak</p>
+          <div class="prompt-card bad">"Animate this SVG"<br><br><em style="font-size:13px;color:var(--text-muted);">Claude will guess. You'll iterate 3-4 times.</em></div>
+        </div>
+        <div>
+          <p style="font-size:13px;color:#22c55e;font-weight:600;margin-bottom:8px;">Strong</p>
+          <div class="prompt-card good">"Read spiral.svg. It has an outer circle and two inner circles centered at (15,15). Add a gentle pulse to the inner circles — animate r ±1 unit, 3s duration, stagger 0.3s. Keep outer circle static. Loop forever."<br><br><em style="font-size:13px;color:var(--text-muted);">Specific elements, named technique, exact values, clear constraints.</em></div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px;margin-bottom:16px;font-size:1.25rem;font-weight:600;">Iteration Tips</h3>
+      <ul style="list-style:disc;padding-left:24px;">
+        <li style="color:var(--text-muted);margin-bottom:8px;">"Draw-on is too fast — increase dur from 2s to 4s" <em>(not "make it slower")</em></li>
+        <li style="color:var(--text-muted);margin-bottom:8px;">"Waves overflow clipPath — reduce translate from 5 to 3 units"</li>
+        <li style="color:var(--text-muted);">"Stagger feels jerky — reduce begin offset from 1s to 0.3s"</li>
+      </ul>
     </div>
   </section>
 
@@ -532,9 +596,55 @@
        ========================================= -->
   <section class="section" id="take-it-home">
     <h2 class="section-title">Take It Home</h2>
-    <p class="section-subtitle">Content coming soon...</p>
     <div id="take-it-home-content">
-      <!-- Placeholder for section content -->
+      <div class="ref-grid">
+        <div class="card ref-card">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="margin-bottom:8px;"><circle cx="15" cy="15" r="14.5" stroke="#2563eb"/><circle cx="15" cy="15" r="9.5" stroke="#2563eb"><animate attributeName="r" values="9.5;11;9.5" dur="2s" repeatCount="indefinite"/></circle></svg>
+          <strong style="font-size:14px;display:block;margin-bottom:4px;">Pulse</strong>
+          <span style="font-size:12px;color:var(--text-muted);">Breathe in and out</span>
+        </div>
+        <div class="card ref-card">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="margin-bottom:8px;"><defs><clipPath id="ref-expand-clip"><circle cx="15" cy="15" r="14"/></clipPath></defs><circle cx="15" cy="15" r="14.5" stroke="#2563eb"/><g clip-path="url(#ref-expand-clip)"><circle cx="15" cy="15" stroke="#2563eb" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" repeatCount="indefinite"/></circle></g></svg>
+          <strong style="font-size:14px;display:block;margin-bottom:4px;">Expand</strong>
+          <span style="font-size:12px;color:var(--text-muted);">Grow from center</span>
+        </div>
+        <div class="card ref-card">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="margin-bottom:8px;"><circle cx="15" cy="15" r="14.5" stroke="#2563eb"/><circle cx="15" cy="15" r="9.5" stroke="#2563eb" stroke-dasharray="91.1" stroke-dashoffset="91.1"><animate attributeName="stroke-dashoffset" values="91.1;0" dur="2s" repeatCount="indefinite"/></circle></svg>
+          <strong style="font-size:14px;display:block;margin-bottom:4px;">Draw-On</strong>
+          <span style="font-size:12px;color:var(--text-muted);">Stroke reveal</span>
+        </div>
+        <div class="card ref-card">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="margin-bottom:8px;"><circle cx="15" cy="15" r="14.5" stroke="#2563eb"/><circle cx="15" cy="15" r="9.5" stroke="#2563eb" stroke-dasharray="15 45"><animateTransform attributeName="transform" type="rotate" from="0 15 15" to="360 15 15" dur="3s" repeatCount="indefinite"/></circle></svg>
+          <strong style="font-size:14px;display:block;margin-bottom:4px;">Rotate</strong>
+          <span style="font-size:12px;color:var(--text-muted);">Spin arcs</span>
+        </div>
+        <div class="card ref-card">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="margin-bottom:8px;"><defs><clipPath id="ref-translate-clip"><circle cx="15" cy="15" r="14"/></clipPath></defs><circle cx="15" cy="15" r="14.5" stroke="#2563eb"/><g clip-path="url(#ref-translate-clip)"><line x1="15" y1="5" x2="15" y2="25" stroke="#2563eb"><animateTransform attributeName="transform" type="translate" values="-3,0;3,0;-3,0" dur="2s" repeatCount="indefinite"/></line></g></svg>
+          <strong style="font-size:14px;display:block;margin-bottom:4px;">Translate</strong>
+          <span style="font-size:12px;color:var(--text-muted);">Slide and sway</span>
+        </div>
+        <div class="card ref-card">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" style="margin-bottom:8px;"><circle cx="15" cy="15" r="14.5" stroke="#2563eb"/><circle cx="15" cy="15" r="9.5" stroke="#2563eb"><animate attributeName="stroke-opacity" values="1;0.15;1" dur="2s" repeatCount="indefinite"/></circle></svg>
+          <strong style="font-size:14px;display:block;margin-bottom:4px;">Opacity</strong>
+          <span style="font-size:12px;color:var(--text-muted);">Fade toggle</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top:48px;margin-bottom:20px;font-size:1.25rem;font-weight:600;">Tools & Links</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="padding:16px 20px;">
+          <strong>Claude Code</strong> — <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:14px;">npm install -g @anthropic-ai/claude-code</code>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong>Figma MCP</strong> — <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:14px;">claude mcp add figma https://mcp.figma.com/mcp</code>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong>Claude.ai</strong> — Upload .svg files directly in chat for quick animation
+        </div>
+        <div class="card" style="padding:16px 20px;">
+          <strong>LottieFiles</strong> — Upload .json for cross-platform animation testing
+        </div>
+      </div>
     </div>
   </section>
 
@@ -542,7 +652,7 @@
        FOOTER
        ========================================= -->
   <footer>
-    <p>AI-Powered SVG Animation Workshop</p>
+    <p>Peak Perspective Media + Willa Creative</p>
   </footer>
 
 
