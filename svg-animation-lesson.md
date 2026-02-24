@@ -3,7 +3,7 @@
 **From Static Icons to Production Motion — Without After Effects**
 
 *A practical guide to animating SVGs with Claude, SMIL, and Lottie*
-*Peak Perspective Media • Willa Creative*
+*Willa Creative*
 
 ---
 
