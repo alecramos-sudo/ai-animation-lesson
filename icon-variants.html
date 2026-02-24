@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG Animation Variants</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  * { margin: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #080b10;
+    font-family: 'DM Sans', sans-serif;
+    color: #a0aab4;
+    padding: 60px 40px 80px;
+  }
+
+  header {
+    max-width: 960px;
+    margin: 0 auto 60px;
+  }
+
+  header h1 {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #4a5568;
+    margin-bottom: 12px;
+  }
+
+  header p {
+    font-size: 28px;
+    font-weight: 300;
+    color: #d1dbe6;
+    line-height: 1.35;
+    max-width: 560px;
+  }
+
+  header p em {
+    color: #F2F7F9;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .icon-group {
+    max-width: 960px;
+    margin: 0 auto 56px;
+  }
+
+  .icon-group-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #3d4a57;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #151b24;
+  }
+
+  .variants {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 16px 18px;
+    border-radius: 10px;
+    background: #0d1117;
+    border: 1px solid #151b24;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .variant:hover {
+    border-color: #252d3a;
+    background: #111820;
+  }
+
+  .variant svg {
+    margin-bottom: 16px;
+  }
+
+  .variant-name {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #4a5568;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Animation Workshop</h1>
+  <p>SVG icon variants — <em>same source, different motion</em></p>
+</header>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SPIRAL -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="icon-group">
+  <div class="icon-group-label">Spiral — Concentric Circles</div>
+  <div class="variants">
+
+    <!-- Static -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/><circle cx="15" cy="15" r="9.5" stroke="#F2F7F9"/><circle cx="15" cy="15" r="4.5" stroke="#F2F7F9"/></svg>
+      <div class="variant-name">Static</div>
+    </div>
+
+    <!-- Hypnotic Zoom -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <defs><clipPath id="sz1"><circle cx="15" cy="15" r="14"/></clipPath></defs>
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9" fill="none"/>
+        <g clip-path="url(#sz1)">
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+          <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+        </g>
+      </svg>
+      <div class="variant-name">Hypnotic Zoom</div>
+    </div>
+
+    <!-- Pulse -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <circle cx="15" cy="15" r="9.5" stroke="#F2F7F9">
+          <animate attributeName="r" values="9.5;10.5;9.5" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="15" cy="15" r="4.5" stroke="#F2F7F9">
+          <animate attributeName="r" values="4.5;5.5;4.5" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div class="variant-name">Pulse</div>
+    </div>
+
+    <!-- Breathe -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <circle cx="15" cy="15" stroke="#F2F7F9" fill="none">
+          <animate attributeName="r" values="9.5;12;9.5" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="15" cy="15" stroke="#F2F7F9" fill="none">
+          <animate attributeName="r" values="4.5;2;4.5" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div class="variant-name">Breathe</div>
+    </div>
+
+    <!-- Spin -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <circle cx="15" cy="15" r="9.5" stroke="#F2F7F9" stroke-dasharray="15 45">
+          <animateTransform attributeName="transform" type="rotate" from="0 15 15" to="360 15 15" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="15" cy="15" r="4.5" stroke="#F2F7F9" stroke-dasharray="7 22">
+          <animateTransform attributeName="transform" type="rotate" from="360 15 15" to="0 15 15" dur="2s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div class="variant-name">Spin</div>
+    </div>
+
+    <!-- Sequential Reveal -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9" stroke-dasharray="91.1" stroke-dashoffset="91.1">
+          <animate attributeName="stroke-dashoffset" values="91.1;0;0;91.1" keyTimes="0;0.2;0.8;1" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="15" cy="15" r="9.5" stroke="#F2F7F9" stroke-dasharray="59.7" stroke-dashoffset="59.7">
+          <animate attributeName="stroke-dashoffset" values="59.7;59.7;0;0;59.7" keyTimes="0;0.15;0.35;0.8;1" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="15" cy="15" r="4.5" stroke="#F2F7F9" stroke-dasharray="28.3" stroke-dashoffset="28.3">
+          <animate attributeName="stroke-dashoffset" values="28.3;28.3;28.3;0;0;28.3" keyTimes="0;0.15;0.3;0.5;0.8;1" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div class="variant-name">Draw On</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- WAVES -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="icon-group">
+  <div class="icon-group-label">Waves — Ocean Lines</div>
+  <div class="variants">
+
+    <!-- Static -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g clip-path="url(#wc0)"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <path d="M0.5 18L4.125 15C6.228 13.259 9.272 13.259 11.375 15C13.478 16.741 16.522 16.741 18.625 15C20.728 13.259 23.772 13.259 25.875 15L29.5 18" stroke="#F2F7F9"/>
+        <path d="M0.5 12L4.125 9C6.228 7.259 9.272 7.259 11.375 9C13.478 10.741 16.522 10.741 18.625 9C20.728 7.259 23.772 7.259 25.875 9L29.5 12" stroke="#F2F7F9"/>
+        <path d="M0.5 24L4.125 21C6.228 19.259 9.272 19.259 11.375 21C13.478 22.741 16.522 22.741 18.625 21C20.728 19.259 23.772 19.259 25.875 21L29.5 24" stroke="#F2F7F9"/></g>
+        <defs><clipPath id="wc0"><rect width="30" height="30" rx="15" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="variant-name">Static</div>
+    </div>
+
+    <!-- Rolling Waves -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g clip-path="url(#wc1)"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g><path d="M0.5 12L4.125 9C6.228 7.259 9.272 7.259 11.375 9C13.478 10.741 16.522 10.741 18.625 9C20.728 7.259 23.772 7.259 25.875 9L29.5 12" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="0,0;-3,0;0,0;3,0;0,0" dur="4s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 18L4.125 15C6.228 13.259 9.272 13.259 11.375 15C13.478 16.741 16.522 16.741 18.625 15C20.728 13.259 23.772 13.259 25.875 15L29.5 18" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="0,0;3,0;0,0;-3,0;0,0" dur="4s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 24L4.125 21C6.228 19.259 9.272 19.259 11.375 21C13.478 22.741 16.522 22.741 18.625 21C20.728 19.259 23.772 19.259 25.875 21L29.5 24" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="0,0;-3,0;0,0;3,0;0,0" dur="4s" begin="0.3s" repeatCount="indefinite"/>
+        </path></g></g>
+        <defs><clipPath id="wc1"><rect width="30" height="30" rx="15" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="variant-name">Rolling</div>
+    </div>
+
+    <!-- Rise & Fall -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g clip-path="url(#wc2)"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <path d="M0.5 12L4.125 9C6.228 7.259 9.272 7.259 11.375 9C13.478 10.741 16.522 10.741 18.625 9C20.728 7.259 23.772 7.259 25.875 9L29.5 12" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,-2;0,0;0,2;0,0" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 18L4.125 15C6.228 13.259 9.272 13.259 11.375 15C13.478 16.741 16.522 16.741 18.625 15C20.728 13.259 23.772 13.259 25.875 15L29.5 18" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,2;0,0;0,-2;0,0" dur="3s" begin="0.4s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 24L4.125 21C6.228 19.259 9.272 19.259 11.375 21C13.478 22.741 16.522 22.741 18.625 21C20.728 19.259 23.772 19.259 25.875 21L29.5 24" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,-2;0,0;0,2;0,0" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+        </path></g>
+        <defs><clipPath id="wc2"><rect width="30" height="30" rx="15" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="variant-name">Rise &amp; Fall</div>
+    </div>
+
+    <!-- Cascade -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g clip-path="url(#wc3)"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <path d="M0.5 12L4.125 9C6.228 7.259 9.272 7.259 11.375 9C13.478 10.741 16.522 10.741 18.625 9C20.728 7.259 23.772 7.259 25.875 9L29.5 12" stroke="#F2F7F9" stroke-dasharray="60" stroke-dashoffset="60">
+          <animate attributeName="stroke-dashoffset" values="60;0;0;-60" keyTimes="0;0.3;0.7;1" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 18L4.125 15C6.228 13.259 9.272 13.259 11.375 15C13.478 16.741 16.522 16.741 18.625 15C20.728 13.259 23.772 13.259 25.875 15L29.5 18" stroke="#F2F7F9" stroke-dasharray="60" stroke-dashoffset="60">
+          <animate attributeName="stroke-dashoffset" values="60;0;0;-60" keyTimes="0;0.3;0.7;1" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 24L4.125 21C6.228 19.259 9.272 19.259 11.375 21C13.478 22.741 16.522 22.741 18.625 21C20.728 19.259 23.772 19.259 25.875 21L29.5 24" stroke="#F2F7F9" stroke-dasharray="60" stroke-dashoffset="60">
+          <animate attributeName="stroke-dashoffset" values="60;0;0;-60" keyTimes="0;0.3;0.7;1" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+        </path></g>
+        <defs><clipPath id="wc3"><rect width="30" height="30" rx="15" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="variant-name">Draw Cascade</div>
+    </div>
+
+    <!-- Sway -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g clip-path="url(#wc4)"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <path d="M0.5 12L4.125 9C6.228 7.259 9.272 7.259 11.375 9C13.478 10.741 16.522 10.741 18.625 9C20.728 7.259 23.772 7.259 25.875 9L29.5 12" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="-4,0;4,0;-4,0" dur="2.5s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 18L4.125 15C6.228 13.259 9.272 13.259 11.375 15C13.478 16.741 16.522 16.741 18.625 15C20.728 13.259 23.772 13.259 25.875 15L29.5 18" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="4,0;-4,0;4,0" dur="2.5s" repeatCount="indefinite"/>
+        </path>
+        <path d="M0.5 24L4.125 21C6.228 19.259 9.272 19.259 11.375 21C13.478 22.741 16.522 22.741 18.625 21C20.728 19.259 23.772 19.259 25.875 21L29.5 24" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="translate" values="-4,0;4,0;-4,0" dur="2.5s" begin="0.4s" repeatCount="indefinite"/>
+        </path></g>
+        <defs><clipPath id="wc4"><rect width="30" height="30" rx="15" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="variant-name">Sway</div>
+    </div>
+
+    <!-- Drift Up -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g clip-path="url(#wc5)"><circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0,6;0,-6;0,6" dur="4s" repeatCount="indefinite"/>
+          <path d="M0.5 12L4.125 9C6.228 7.259 9.272 7.259 11.375 9C13.478 10.741 16.522 10.741 18.625 9C20.728 7.259 23.772 7.259 25.875 9L29.5 12" stroke="#F2F7F9"/>
+          <path d="M0.5 18L4.125 15C6.228 13.259 9.272 13.259 11.375 15C13.478 16.741 16.522 16.741 18.625 15C20.728 13.259 23.772 13.259 25.875 15L29.5 18" stroke="#F2F7F9"/>
+          <path d="M0.5 24L4.125 21C6.228 19.259 9.272 19.259 11.375 21C13.478 22.741 16.522 22.741 18.625 21C20.728 19.259 23.772 19.259 25.875 21L29.5 24" stroke="#F2F7F9"/>
+        </g></g>
+        <defs><clipPath id="wc5"><rect width="30" height="30" rx="15" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="variant-name">Tide</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- ANGELA CAGLIA -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="icon-group">
+  <div class="icon-group-label">Caglia — Circle / Oval / Circle</div>
+  <div class="variants">
+
+    <!-- Static -->
+    <div class="variant">
+      <svg width="42" height="42" viewBox="0 0 421 422" fill="none"><circle cx="210.5" cy="211" r="210" stroke="#F2F7F9"/><circle cx="210.501" cy="147.544" r="147.044" stroke="#F2F7F9"/><circle cx="210.499" cy="338.351" r="82.6497" stroke="#F2F7F9"/><path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#F2F7F9"/></svg>
+      <div class="variant-name">Static</div>
+    </div>
+
+    <!-- Sequential Reveal -->
+    <div class="variant">
+      <svg width="42" height="42" viewBox="0 0 421 422" fill="none">
+        <circle cx="210.5" cy="211" r="210" stroke="#F2F7F9"/>
+        <circle cx="210.501" cy="147.544" r="147.044" stroke="#F2F7F9">
+          <animate attributeName="stroke-opacity" values="1;0;0;1;1" keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210.499" cy="338.351" r="82.6497" stroke="#F2F7F9">
+          <animate attributeName="stroke-opacity" values="1;1;0;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#F2F7F9">
+          <animate attributeName="stroke-opacity" values="1;0;1;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <div class="variant-name">Sequential</div>
+    </div>
+
+    <!-- Rotate Oval -->
+    <div class="variant">
+      <svg width="42" height="42" viewBox="0 0 421 422" fill="none">
+        <circle cx="210.5" cy="211" r="210" stroke="#F2F7F9"/>
+        <circle cx="210.501" cy="147.544" r="147.044" stroke="#F2F7F9"/>
+        <circle cx="210.499" cy="338.351" r="82.6497" stroke="#F2F7F9"/>
+        <path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="rotate" from="0 210.5 211" to="360 210.5 211" dur="8s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <div class="variant-name">Orbit</div>
+    </div>
+
+    <!-- Breathe -->
+    <div class="variant">
+      <svg width="42" height="42" viewBox="0 0 421 422" fill="none">
+        <circle cx="210.5" cy="211" r="210" stroke="#F2F7F9"/>
+        <circle cx="210.501" cy="147.544" stroke="#F2F7F9" fill="none">
+          <animate attributeName="r" values="147.044;155;147.044" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210.499" cy="338.351" stroke="#F2F7F9" fill="none">
+          <animate attributeName="r" values="82.6497;76;82.6497" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#F2F7F9">
+          <animateTransform attributeName="transform" type="scale" values="1;1.03;1" dur="3s" begin="0.25s" repeatCount="indefinite" additive="sum"/>
+        </path>
+      </svg>
+      <div class="variant-name">Breathe</div>
+    </div>
+
+    <!-- Draw On -->
+    <div class="variant">
+      <svg width="42" height="42" viewBox="0 0 421 422" fill="none">
+        <circle cx="210.5" cy="211" r="210" stroke="#F2F7F9" stroke-dasharray="1319.5" stroke-dashoffset="1319.5">
+          <animate attributeName="stroke-dashoffset" values="1319.5;0;0;1319.5" keyTimes="0;0.25;0.75;1" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210.501" cy="147.544" r="147.044" stroke="#F2F7F9" stroke-dasharray="923.6" stroke-dashoffset="923.6">
+          <animate attributeName="stroke-dashoffset" values="923.6;923.6;0;0;923.6" keyTimes="0;0.15;0.4;0.75;1" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210.499" cy="338.351" r="82.6497" stroke="#F2F7F9" stroke-dasharray="519.2" stroke-dashoffset="519.2">
+          <animate attributeName="stroke-dashoffset" values="519.2;519.2;519.2;0;0;519.2" keyTimes="0;0.15;0.3;0.55;0.75;1" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <path d="M210.5 128.787C268.581 128.787 321.141 138.088 359.162 153.106C378.174 160.616 393.526 169.546 404.116 179.437C414.706 189.326 420.5 200.14 420.5 211.437C420.5 222.733 414.706 233.547 404.116 243.437C393.526 253.327 378.174 262.258 359.162 269.768C321.141 284.786 268.581 294.087 210.5 294.087C152.419 294.087 99.859 284.786 61.8379 269.768C42.8258 262.258 27.4742 253.327 16.8838 243.437C6.29414 233.547 0.5 222.733 0.5 211.437C0.500094 200.14 6.29421 189.326 16.8838 179.437C27.4742 169.546 42.826 160.616 61.8379 153.106C99.859 138.088 152.419 128.787 210.5 128.787Z" stroke="#F2F7F9" stroke-dasharray="1100" stroke-dashoffset="1100">
+          <animate attributeName="stroke-dashoffset" values="1100;1100;1100;1100;0;0;1100" keyTimes="0;0.15;0.3;0.45;0.7;0.8;1" dur="4s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <div class="variant-name">Draw On</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- LINES — Circle + 3 Vertical Lines -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="icon-group">
+  <div class="icon-group-label">Lines — Circle + Vertical Bars</div>
+  <div class="variants">
+
+    <!-- Static -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <line x1="8" y1="2" x2="8" y2="28" stroke="#F2F7F9"/>
+        <line x1="15" y1="0" x2="15" y2="29" stroke="#F2F7F9"/>
+        <line x1="22" y1="2" x2="22" y2="28" stroke="#F2F7F9"/>
+      </svg>
+      <div class="variant-name">Static</div>
+    </div>
+
+    <!-- Draw Cascade -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <line x1="8" y1="2" x2="8" y2="28" stroke="#F2F7F9" stroke-dasharray="26" stroke-dashoffset="26">
+          <animate attributeName="stroke-dashoffset" values="26;0;0;-26" keyTimes="0;0.3;0.7;1" dur="2.5s" repeatCount="indefinite"/>
+        </line>
+        <line x1="15" y1="0" x2="15" y2="29" stroke="#F2F7F9" stroke-dasharray="29" stroke-dashoffset="29">
+          <animate attributeName="stroke-dashoffset" values="29;0;0;-29" keyTimes="0;0.3;0.7;1" dur="2.5s" begin="0.25s" repeatCount="indefinite"/>
+        </line>
+        <line x1="22" y1="2" x2="22" y2="28" stroke="#F2F7F9" stroke-dasharray="26" stroke-dashoffset="26">
+          <animate attributeName="stroke-dashoffset" values="26;0;0;-26" keyTimes="0;0.3;0.7;1" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+        </line>
+      </svg>
+      <div class="variant-name">Draw Cascade</div>
+    </div>
+
+    <!-- Equalizer -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <defs><clipPath id="lc1"><circle cx="15" cy="15" r="14"/></clipPath></defs>
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g clip-path="url(#lc1)">
+          <line x1="8" y1="28" x2="8" y2="28" stroke="#F2F7F9">
+            <animate attributeName="y1" values="28;6;16;2;20;10;28" dur="1.8s" repeatCount="indefinite"/>
+          </line>
+          <line x1="15" y1="29" x2="15" y2="29" stroke="#F2F7F9">
+            <animate attributeName="y1" values="29;2;18;8;24;0;29" dur="1.6s" repeatCount="indefinite"/>
+          </line>
+          <line x1="22" y1="28" x2="22" y2="28" stroke="#F2F7F9">
+            <animate attributeName="y1" values="28;10;4;22;8;18;28" dur="2s" repeatCount="indefinite"/>
+          </line>
+        </g>
+      </svg>
+      <div class="variant-name">Equalizer</div>
+    </div>
+
+    <!-- Sway -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <defs><clipPath id="lc2"><circle cx="15" cy="15" r="14"/></clipPath></defs>
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g clip-path="url(#lc2)">
+          <line x1="8" y1="2" x2="8" y2="28" stroke="#F2F7F9">
+            <animateTransform attributeName="transform" type="translate" values="0,0;2,0;0,0;-2,0;0,0" dur="3s" repeatCount="indefinite"/>
+          </line>
+          <line x1="15" y1="0" x2="15" y2="29" stroke="#F2F7F9">
+            <animateTransform attributeName="transform" type="translate" values="0,0;-2,0;0,0;2,0;0,0" dur="3s" begin="0.2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="22" y1="2" x2="22" y2="28" stroke="#F2F7F9">
+            <animateTransform attributeName="transform" type="translate" values="0,0;2,0;0,0;-2,0;0,0" dur="3s" begin="0.4s" repeatCount="indefinite"/>
+          </line>
+        </g>
+      </svg>
+      <div class="variant-name">Sway</div>
+    </div>
+
+    <!-- Scan -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <defs><clipPath id="lc3"><circle cx="15" cy="15" r="14"/></clipPath></defs>
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g clip-path="url(#lc3)">
+          <line x1="8" y1="2" x2="8" y2="28" stroke="#F2F7F9">
+            <animate attributeName="stroke-opacity" values="1;0.15;1" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="15" y1="0" x2="15" y2="29" stroke="#F2F7F9">
+            <animate attributeName="stroke-opacity" values="1;0.15;1" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+          </line>
+          <line x1="22" y1="2" x2="22" y2="28" stroke="#F2F7F9">
+            <animate attributeName="stroke-opacity" values="1;0.15;1" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+          </line>
+        </g>
+      </svg>
+      <div class="variant-name">Scan</div>
+    </div>
+
+    <!-- Spread -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <defs><clipPath id="lc4"><circle cx="15" cy="15" r="14"/></clipPath></defs>
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g clip-path="url(#lc4)">
+          <line x1="8" y1="2" x2="8" y2="28" stroke="#F2F7F9">
+            <animate attributeName="x1" values="8;5;8" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="x2" values="8;5;8" dur="3s" repeatCount="indefinite"/>
+          </line>
+          <line x1="15" y1="0" x2="15" y2="29" stroke="#F2F7F9"/>
+          <line x1="22" y1="2" x2="22" y2="28" stroke="#F2F7F9">
+            <animate attributeName="x1" values="22;25;22" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="x2" values="22;25;22" dur="3s" repeatCount="indefinite"/>
+          </line>
+        </g>
+      </svg>
+      <div class="variant-name">Spread</div>
+    </div>
+
+    <!-- Rotate -->
+    <div class="variant">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 15 15" to="360 15 15" dur="6s" repeatCount="indefinite"/>
+          <line x1="8" y1="2" x2="8" y2="28" stroke="#F2F7F9"/>
+          <line x1="15" y1="0" x2="15" y2="29" stroke="#F2F7F9"/>
+          <line x1="22" y1="2" x2="22" y2="28" stroke="#F2F7F9"/>
+        </g>
+      </svg>
+      <div class="variant-name">Rotate</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

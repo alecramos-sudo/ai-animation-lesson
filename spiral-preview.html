@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spiral Animation Preview</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0f14;
+    gap: 60px;
+    font-family: system-ui, sans-serif;
+    color: #F2F7F9;
+  }
+  .item { text-align: center; }
+  .label { font-size: 11px; opacity: 0.4; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="item">
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9"/>
+    <circle cx="15" cy="15" r="9.5" stroke="#F2F7F9"/>
+    <circle cx="15" cy="15" r="4.5" stroke="#F2F7F9"/>
+  </svg>
+  <div class="label">Original</div>
+</div>
+
+<div class="item">
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs><clipPath id="c"><circle cx="15" cy="15" r="14"/></clipPath></defs>
+    <circle cx="15" cy="15" r="14.5" stroke="#F2F7F9" fill="none"/>
+    <g clip-path="url(#c)">
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="3s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="0;4.5;9.5;14.5" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="4.5;9.5;14.5;19.5" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+      <circle cx="15" cy="15" stroke="#F2F7F9" fill="none"><animate attributeName="r" values="9.5;14.5;19.5;24.5" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+    </g>
+  </svg>
+  <div class="label">Animated</div>
+</div>
+
+</body>
+</html>
