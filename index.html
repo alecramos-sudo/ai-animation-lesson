@@ -333,9 +333,19 @@
        ========================================= -->
   <section class="section" id="what-ai-can-do">
     <h2 class="section-title">What AI Can Do Today</h2>
-    <p class="section-subtitle">Content coming soon...</p>
     <div id="what-ai-content">
-      <!-- Placeholder for section content -->
+      <div class="card" style="margin-bottom:16px;">
+        <strong>Text &amp; Code</strong> — ChatGPT, Claude, Gemini. Conversational AI that writes, edits, summarizes, and codes. Free tiers available — paid unlocks longer context and better models.
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <strong>Images &amp; Video</strong> — Midjourney, DALL-E, Runway, Firefly. Generate and edit visuals from text prompts. Quality is production-ready for many use cases.
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <strong>Design &amp; Prototyping</strong> — Figma AI, Galileo, v0. AI is entering the design tool workflow directly — generating layouts, components, and prototypes.
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <strong>What they all share</strong> — They work best when you're specific. Vague input = generic output. The skill is learning to direct them.
+      </div>
     </div>
   </section>
 
@@ -344,9 +354,10 @@
        ========================================= -->
   <section class="section" id="changing-design">
     <h2 class="section-title">How It's Changing Design Work</h2>
-    <p class="section-subtitle">Content coming soon...</p>
     <div id="changing-design-content">
-      <!-- Placeholder for section content -->
+      <div class="quote-block">AI doesn't replace taste — it accelerates execution</div>
+      <div class="quote-block">The gap between idea and prototype is shrinking to minutes</div>
+      <div class="quote-block">Knowing what to ask for is the new core skill</div>
     </div>
   </section>
 
@@ -354,7 +365,7 @@
        TRANSITION MOMENT
        ========================================= -->
   <div class="transition-block" id="transition-moment">
-    <p>Content coming soon...</p>
+    <p>Let's get hands-on with one specific thing AI is great at — turning static icons into animated ones.</p>
   </div>
 
   <!-- =========================================
@@ -362,9 +373,38 @@
        ========================================= -->
   <section class="section" id="meet-the-svg">
     <h2 class="section-title">Meet the SVG</h2>
-    <p class="section-subtitle">Content coming soon...</p>
     <div id="meet-svg-content">
-      <!-- Placeholder for section content -->
+      <svg id="anatomy-diagram" viewBox="0 0 60 60" width="200" height="200" style="display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dashed viewBox rectangle -->
+        <rect id="anatomy-viewbox-rect" x="0.5" y="0.5" width="59" height="59" fill="none" stroke="#6b7280" stroke-width="0.4" stroke-dasharray="1.5,1" />
+        <text id="anatomy-viewbox-label" x="2" y="3.5" font-size="3" fill="#6b7280" font-family="system-ui, sans-serif">viewBox</text>
+
+        <!-- Outer circle r=14.5 -->
+        <circle id="anatomy-outer" cx="30" cy="30" r="14.5" fill="none" stroke="#2563eb" stroke-width="0.6" />
+        <line id="anatomy-outer-line" x1="44.5" y1="30" x2="52" y2="22" stroke="#6b7280" stroke-width="0.3" />
+        <text id="anatomy-outer-label" x="52.5" y="22.5" font-size="3" fill="#6b7280" font-family="system-ui, sans-serif">r=14.5</text>
+
+        <!-- Middle circle r=9.5 -->
+        <circle id="anatomy-middle" cx="30" cy="30" r="9.5" fill="none" stroke="#2563eb" stroke-width="0.6" />
+        <line id="anatomy-middle-line" x1="39.5" y1="30" x2="52" y2="34" stroke="#6b7280" stroke-width="0.3" />
+        <text id="anatomy-middle-label" x="52.5" y="34.5" font-size="3" fill="#6b7280" font-family="system-ui, sans-serif">r=9.5</text>
+
+        <!-- Inner circle r=4.5 -->
+        <circle id="anatomy-inner" cx="30" cy="30" r="4.5" fill="none" stroke="#2563eb" stroke-width="0.6" />
+        <line id="anatomy-inner-line" x1="34.5" y1="30" x2="52" y2="42" stroke="#6b7280" stroke-width="0.3" />
+        <text id="anatomy-inner-label" x="52.5" y="42.5" font-size="3" fill="#6b7280" font-family="system-ui, sans-serif">r=4.5</text>
+
+        <!-- Center dot -->
+        <circle id="anatomy-center-dot" cx="30" cy="30" r="0.7" fill="#2563eb" />
+        <line id="anatomy-center-line" x1="30" y1="30" x2="10" y2="50" stroke="#6b7280" stroke-width="0.3" />
+        <text id="anatomy-center-label" x="2" y="52" font-size="3" fill="#6b7280" font-family="system-ui, sans-serif">center (15,15)</text>
+      </svg>
+
+      <ul style="margin-top:32px;list-style:disc;padding-left:24px;">
+        <li style="color:var(--text-muted);margin-bottom:8px;">Every SVG is just shapes described in coordinates</li>
+        <li style="color:var(--text-muted);margin-bottom:8px;">The viewBox is the coordinate system — animations use these numbers</li>
+        <li style="color:var(--text-muted);">Each shape can be animated independently</li>
+      </ul>
     </div>
   </section>
 
@@ -380,45 +420,41 @@
       <!-- Pulse Playground -->
       <div class="card" id="pulse-playground">
         <h3 class="playground-card-title">Pulse</h3>
+        <p class="section-subtitle" style="margin-bottom:16px;font-size:15px;">A gentle breathing motion — the shape grows and shrinks rhythmically.</p>
         <div class="playground">
           <div class="svg-preview">
-            <div id="pulse-svg-container">
-              <!-- SVG will be injected here -->
-            </div>
+            <div id="pulse-svg-container"></div>
           </div>
           <div class="controls">
             <div class="slider-group">
-              <label>Speed <span id="pulse-speed-value">1.0s</span></label>
-              <input type="range" id="pulse-speed" min="0.2" max="3" step="0.1" value="1.0">
+              <label for="pulse-dur">Duration <span id="pulse-dur-value">2s</span></label>
+              <input type="range" id="pulse-dur" min="1" max="6" step="0.5" value="2">
             </div>
             <div class="slider-group">
-              <label>Scale <span id="pulse-scale-value">1.2</span></label>
-              <input type="range" id="pulse-scale" min="1.0" max="2.0" step="0.1" value="1.2">
+              <label for="pulse-intensity">Intensity <span id="pulse-intensity-value">1</span></label>
+              <input type="range" id="pulse-intensity" min="0.5" max="3" step="0.5" value="1">
             </div>
-            <button class="toggle-btn active" id="pulse-toggle">Playing</button>
           </div>
         </div>
       </div>
 
       <!-- Expand Playground -->
       <div class="card" id="expand-playground">
-        <h3 class="playground-card-title">Expand</h3>
+        <h3 class="playground-card-title">Hypnotic Zoom</h3>
+        <p class="section-subtitle" style="margin-bottom:16px;font-size:15px;">Circles expand outward from center in continuous waves.</p>
         <div class="playground">
           <div class="svg-preview">
-            <div id="expand-svg-container">
-              <!-- SVG will be injected here -->
-            </div>
+            <div id="expand-svg-container"></div>
           </div>
           <div class="controls">
             <div class="slider-group">
-              <label>Duration <span id="expand-duration-value">0.6s</span></label>
-              <input type="range" id="expand-duration" min="0.1" max="2" step="0.1" value="0.6">
+              <label for="expand-dur">Duration <span id="expand-dur-value">3s</span></label>
+              <input type="range" id="expand-dur" min="2" max="8" step="0.5" value="3">
             </div>
             <div class="slider-group">
-              <label>Distance <span id="expand-distance-value">8px</span></label>
-              <input type="range" id="expand-distance" min="2" max="20" step="1" value="8">
+              <label for="expand-waves">Wave Count <span id="expand-waves-value">3</span></label>
+              <input type="range" id="expand-waves" min="2" max="5" step="1" value="3">
             </div>
-            <button class="toggle-btn active" id="expand-toggle">Playing</button>
           </div>
         </div>
       </div>
@@ -426,22 +462,21 @@
       <!-- Spin Playground -->
       <div class="card" id="spin-playground">
         <h3 class="playground-card-title">Spin</h3>
+        <p class="section-subtitle" style="margin-bottom:16px;font-size:15px;">Dashed arcs rotate around center — counter-rotate for visual complexity.</p>
         <div class="playground">
           <div class="svg-preview">
-            <div id="spin-svg-container">
-              <!-- SVG will be injected here -->
-            </div>
+            <div id="spin-svg-container"></div>
           </div>
           <div class="controls">
             <div class="slider-group">
-              <label>Speed <span id="spin-speed-value">2.0s</span></label>
-              <input type="range" id="spin-speed" min="0.5" max="5" step="0.1" value="2.0">
+              <label for="spin-dur">Duration <span id="spin-dur-value">3s</span></label>
+              <input type="range" id="spin-dur" min="1" max="8" step="0.5" value="3">
             </div>
             <div class="slider-group">
-              <label>Easing <span id="spin-easing-value">linear</span></label>
-              <input type="range" id="spin-easing" min="0" max="2" step="1" value="0">
+              <label for="spin-arc">Arc Size <span id="spin-arc-value">25%</span></label>
+              <input type="range" id="spin-arc" min="10" max="90" step="5" value="25">
             </div>
-            <button class="toggle-btn active" id="spin-toggle">Playing</button>
+            <button class="toggle-btn" id="spin-dir">Same Direction</button>
           </div>
         </div>
       </div>
@@ -449,22 +484,20 @@
       <!-- Draw-On Playground -->
       <div class="card" id="drawon-playground">
         <h3 class="playground-card-title">Draw-On</h3>
+        <p class="section-subtitle" style="margin-bottom:16px;font-size:15px;">Shapes appear as if drawn by hand, one stroke at a time.</p>
         <div class="playground">
           <div class="svg-preview">
-            <div id="drawon-svg-container">
-              <!-- SVG will be injected here -->
-            </div>
+            <div id="drawon-svg-container"></div>
           </div>
           <div class="controls">
             <div class="slider-group">
-              <label>Duration <span id="drawon-duration-value">1.5s</span></label>
-              <input type="range" id="drawon-duration" min="0.5" max="4" step="0.1" value="1.5">
+              <label for="drawon-dur">Duration <span id="drawon-dur-value">3s</span></label>
+              <input type="range" id="drawon-dur" min="2" max="8" step="0.5" value="3">
             </div>
             <div class="slider-group">
-              <label>Delay <span id="drawon-delay-value">0.0s</span></label>
-              <input type="range" id="drawon-delay" min="0" max="1" step="0.1" value="0">
+              <label for="drawon-stagger">Stagger <span id="drawon-stagger-value">0.15</span></label>
+              <input type="range" id="drawon-stagger" min="0" max="1" step="0.05" value="0.15">
             </div>
-            <button class="toggle-btn active" id="drawon-toggle">Playing</button>
           </div>
         </div>
       </div>
