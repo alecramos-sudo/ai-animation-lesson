@@ -31,8 +31,8 @@ Interactive single-page workshop site for teaching designers about AI + SVG anim
 5. Section 3: "Meet the SVG" — annotated anatomy diagram
 6. Section 4: "One Icon, Many Motions" — 4 interactive playgrounds (Pulse, Hypnotic Zoom, Spin, Draw-On)
 7. Section 5: "A Real Example" — Caglia before/after + prompt
-8. Section 6: "The AI Workflow" — Figma MCP, tool comparison, good/bad prompts
-9. Section 7: "Take It Home" — reference grid + tools list
+8. Section 6: "The AI Workflow" — Figma MCP, tool comparison (incl. HeroUI Studio), good/bad prompts
+9. Section 7: "Take It Home" — reference grid + tools list (incl. HeroUI Studio)
 10. Footer — Willa Creative
 
 ## Reference Files (not linked from main page)

@@ -340,6 +340,29 @@ claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp
 
 > **GOTCHA:** Figma MCP requires file access. For restricted client files, manually export (right-click → Copy as SVG) and paste into a file for Claude to read.
 
+### HeroUI Studio (heroui.studio)
+
+A visual AI canvas purpose-built for SVG animation — the most designer-friendly option. No terminal, no code.
+
+**How it works:**
+
+HeroUI Studio uses a node-based canvas (think: visual programming). You connect nodes to build an animation pipeline:
+
+1. **SVG Source** — Upload an SVG, generate one from a prompt, or paste markup
+2. **Text Prompt** — Describe what you want in plain English ("make the icon pulse", "add a hover scale effect")
+3. **AI Generation** — The AI produces an animated SVG with a live preview
+4. **Animation Prompt** — Fine-tune with presets and controls:
+   - Presets: Entrance (Fade In), Hover (Scale), Loading (Spin), Attention (Bounce), Exit (Slide Out)
+   - Controls: Duration, Delay, Easing curve, Loop toggle
+
+**Iterative chaining:** Connect one generation's output to a new prompt node to refine. Example flow: upload icon → "make it bounce" → "now add a glow on hover" → "slow the bounce to 3s". Each step builds on the last.
+
+**Credits:** Each generation/regeneration costs credits (10 per run). Free tier available.
+
+**Best for:** Designers who want to experiment with animation without touching code. Great for quick prototyping and exploring effects before committing to a production approach.
+
+> **TIP:** HeroUI Studio is ideal for exploring "what if" — try 5 different effects on the same icon in minutes, then recreate the winner in SMIL for production.
+
 ### Claude.ai Chat
 
 Upload `.svg` files directly in chat and describe what you want. Simpler than Claude Code but no batch processing or Figma MCP connection.
